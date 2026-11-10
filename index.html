@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>bench.turing.com: Sub-site Template Audit</title>
+<meta name="description" content="How the 9 bench.turing.com sub-sites compare to the EKWbench reference template.">
+<style>
+:root{--ink:#1f1e1d;--quiet:#6b6a66;--line:#e6e4df;--bg:#faf9f7;--accent:#2a6fd6}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,sans-serif}
+main{max-width:860px;margin:0 auto;padding:48px 20px 80px}
+h1{font-size:34px;line-height:1.2;margin:0 0 6px;letter-spacing:-.01em}
+.meta{color:var(--quiet);font-size:14px;margin-bottom:28px}
+.hero{background:#fff;border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:10px;padding:20px 22px;margin-bottom:12px}
+.hero p{margin:0 0 10px}.hero p:last-child{margin:0}
+h2{font-size:22px;margin:44px 0 12px}
+figure{margin:0;background:#fff;border:1px solid var(--line);border-radius:10px;padding:12px}
+figure img{width:100%;height:auto;display:block}
+.note{color:var(--quiet);margin:10px 2px 0}
+details{background:#fff;border:1px solid var(--line);border-radius:10px;margin:10px 0}
+summary{cursor:pointer;padding:14px 18px;font-weight:600}
+.d{padding:0 18px 16px;overflow-x:auto}
+table{border-collapse:collapse;font-size:13.5px;min-width:100%}
+th,td{border-bottom:1px solid var(--line);padding:7px 9px;text-align:left;vertical-align:top}
+th{background:#f3f2ef;position:sticky;top:0}
+a{color:var(--accent)}
+footer{margin-top:48px;color:var(--quiet);font-size:13px}
+</style></head>
+<body><main>
+<h1>bench.turing.com: Sub-site Template Audit</h1>
+<div class="meta">Checked 2026-11-10 · Ritwik</div>
+<div class="hero">
+<p><strong>bench.turing.com runs 9 sub-sites on 3 different templates, and only EKWbench uses the full reference template.</strong> Six sub-sites share one shell but ship 5 to 7 tabs each. Three sub-sites (SDLCbench, Medical Bench, Open-MM-RL) are standalone pages that break the shell entirely.</p>
+<p><strong>Position:</strong> move every sub-site onto the EKW shell and its 7-tab set. Fix the 3 outliers first, since all 3 drop the "Request dataset samples" CTA (and SDLCbench and Medical also drop the bench switcher), which is the commercial point of the site.</p>
+</div>
+<section><h2>Scoreboard</h2><figure><img src="img/1-scoreboard.png" alt="How closely each sub-site matches the EKW template" loading="lazy"></figure><p class="note">The 6 shared-shell sites sit within 3 checkpoints of EKW; the gap is concentrated in 3 sites, so the fix is focused, not site-wide.</p></section>
+<section><h2>Site map</h2><figure><img src="img/2-site-map.png" alt="9 sub-sites in 3 template families" loading="lazy"></figure><p class="note">The hub lists all 9 benches as cards; the 6 in Family A share one shell, while SDLCbench, Medical Bench and Open-MM-RL each built their own.</p></section>
+<section><h2>Coverage grid</h2><figure><img src="img/3-coverage-grid.png" alt="9 sub-sites x 11 checkpoints" loading="lazy"></figure><p class="note">Holes cluster in two places: the Reward column, and the bottom three rows.</p></section>
+<section><h2>Depth grid</h2><figure><img src="img/4-depth-grid.png" alt="6 shared-shell sites x 16 page parts" loading="lazy"></figure><p class="note">Terminal-Bench 3.0 is the deepest copy of EKW; CEO Bench is the thinnest, with 3 tabs absent and no task pages.</p></section>
+<section><h2>Recommended path to one template</h2><figure><img src="img/5-roadmap.png" alt="3 phases + lock-in, all 13 bugs placed" loading="lazy"></figure></section>
+
+<p class="note">Open question: should bench-specific extras (CEO's Company Data, Odysseys' Replay viewer) be promoted into the EKW template for everyone?</p>
+<h2>Details: every finding, in full</h2>
+<details><summary>Template families</summary><div class="d"><table>
+<thead>
+<tr>
+<th>Family</th>
+<th>Sub-sites</th>
+<th>What it is</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A. Standard bench template</td>
+<td>EKWbench, SciCode++, Terminal-Bench 3.0, CEO Bench, CompanyBench, OdysseysMega</td>
+<td>Shared header, breadcrumb, bench switcher, CTA, multi-page tabs</td>
+</tr>
+<tr>
+<td>B. Standalone dashboard</td>
+<td>SDLCbench, Medical Bench</td>
+<td>Own header and theme, one long page, no switcher or CTA</td>
+</tr>
+<tr>
+<td>C. Datapack landing page</td>
+<td>Open-MM-RL</td>
+<td>Marketing page for a dataset, no leaderboard</td>
+</tr>
+</tbody>
+</table>
+<p>Scope: hub page, all 9 sub-site landing pages, and every tab page of EKWbench, plus Leaderboard, Tasks, a task detail page, Failure Modes, Taxonomy, Reward and Workflow pages across the Family A sites.</p></div></details>
+<details><summary>Shell: what wraps each sub-site</summary><div class="d"><table>
+<thead>
+<tr>
+<th>Shell element</th>
+<th>EKW (reference)</th>
+<th>SciCode++</th>
+<th>TB 3.0</th>
+<th>CEO Bench</th>
+<th>CompanyBench</th>
+<th>OdysseysMega</th>
+<th>SDLCbench</th>
+<th>Medical</th>
+<th>Open-MM-RL</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Partner labels (MoonshotAI, Thinking Machines)</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes + Superintelligent Agents logo</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Breadcrumb (All benches / Bench / Page)</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>No</td>
+<td>Partial (All benches / Medical Bench)</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>"Switch bench" dropdown</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>"Request dataset samples" CTA (header, body, footer)</td>
+<td>3x</td>
+<td>3x</td>
+<td>3x</td>
+<td>3x</td>
+<td>3x</td>
+<td>3x</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+</tr>
+<tr>
+<td>"Anchor model" filter</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Tabs are separate pages (URLs)</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>No, in-page anchors</td>
+<td>No</td>
+<td>No, in-page views</td>
+</tr>
+<tr>
+<td>Theme</td>
+<td>Light, serif</td>
+<td>Light</td>
+<td>Light</td>
+<td>Light</td>
+<td>Light</td>
+<td>Light</td>
+<td>Dark, gold accent</td>
+<td>Light, red accent</td>
+<td>Light, plus dark toggle</td>
+</tr>
+<tr>
+<td>"Last updated" footer</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Bench root URL</td>
+<td>Redirects to /about/</td>
+<td>Redirects to /about/</td>
+<td>/about/</td>
+<td>/about/</td>
+<td>/about/</td>
+<td>/about/</td>
+<td>Is the page</td>
+<td>Is the page</td>
+<td>Is the page</td>
+</tr>
+</tbody>
+</table></div></details>
+<details><summary>The EKW reference template</summary><div class="d"><p><strong>About page, in order</strong> (<a href="https://bench.turing.com/ekw/about/">source</a>)</p>
+<ol>
+<li><strong>Hero:</strong> H1, one paragraph with corpus counts (191 tasks, 9 domains), 5 feature badges, harness list</li>
+<li><strong>CTA card:</strong> "Interested in this benchmark?" + Request dataset samples</li>
+<li><strong>Stat tiles (4):</strong> corpus tasks, measured tasks, models, trials per task</li>
+<li><strong>Bar chart:</strong> task pass rate by model, link to Full leaderboard</li>
+<li><strong>Heatmap:</strong> pass rate by domain x model, link to Full taxonomy</li>
+<li><strong>Reward block:</strong> weighted partial credit explained, link to How reward works</li>
+<li><strong>The Verdict:</strong> per-model one-liner with a best-model stat callout</li>
+<li><strong>Failure Modes:</strong> 4 numbered findings, link to Explore failure modes</li>
+<li><strong>The Evidence:</strong> 3 task cards with per-model bars, link to Explore all tasks</li>
+<li><strong>Footer:</strong> repeat CTA + Last updated date</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>Tab</th>
+<th>Page anatomy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://bench.turing.com/ekw/leaderboard/">Leaderboard</a></td>
+<td>3 tiles (Total tasks, Best reward, Best value) · On-this-page jump list · expandable Model Scorecard · Benchmark Scope · 5 Aggregate Metric bars · Domain Difficulty heatmap · 6 Economics bars · 2 Frontier scatters</td>
+</tr>
+<tr>
+<td><a href="https://bench.turing.com/ekw/tasks/">Tasks</a></td>
+<td>Task Explorer title + counts · domain filter chips · result count · card grid (domain, ID, title, excerpt, verifier counts, per-model scores)</td>
+</tr>
+<tr>
+<td><a href="https://bench.turing.com/ekw/tasks/task-task_116/problem/">Task detail</a></td>
+<td>4 sub-tabs: Problem Statement, Task Package, Results, Trials · prompt · What it tests / How models fail / Why it matters · 4 stat cards (source files, deliverables, golden answer, verifiers)</td>
+</tr>
+<tr>
+<td><a href="https://bench.turing.com/ekw/failure/">Failure Modes</a></td>
+<td>4 numbered key findings · On-this-page TOC · 5 stage cards with modes tagged capability limit / harness-fixable / tradeoff · per-model dot strips · radar Failure profile with model and stage chips · incidence list</td>
+</tr>
+<tr>
+<td><a href="https://bench.turing.com/ekw/taxonomy/">Taxonomy</a></td>
+<td>H1 + 3 stat cards · anchor tree · definitions per domain with examples · Coverage matrix of input and output file types</td>
+</tr>
+<tr>
+<td><a href="https://bench.turing.com/ekw/reward/">Reward</a></td>
+<td>Description / Reward explorer sub-tabs · verifier tiers · formula · weights · grading roles · Score anatomy worked example</td>
+</tr>
+<tr>
+<td><a href="https://bench.turing.com/ekw/workflow/">Workflow &amp; Quality</a></td>
+<td>§1 Task lifecycle swimlane (4 lanes) · §2 QC gates table (6 rows) · §3 QC results stat cards · Attestation notice</td>
+</tr>
+</tbody>
+</table></div></details>
+<details><summary>Which tabs exist</summary><div class="d"><table>
+<thead>
+<tr>
+<th>Tab</th>
+<th>EKW</th>
+<th>SciCode++</th>
+<th>TB 3.0</th>
+<th>CEO</th>
+<th>Company</th>
+<th>Odysseys</th>
+<th>SDLC</th>
+<th>Medical</th>
+<th>Open-MM-RL</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>About</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes (anchor)</td>
+<td>No</td>
+<td>Overview</td>
+</tr>
+<tr>
+<td>Leaderboard</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes (anchor)</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Tasks</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes (anchor)</td>
+<td>Yes</td>
+<td>Task View</td>
+</tr>
+<tr>
+<td>Failure Modes</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+<td><strong>No</strong></td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes (anchor)</td>
+<td>No</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Taxonomy</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+<td><strong>No</strong></td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes (anchor)</td>
+<td>No</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Reward</td>
+<td>Yes</td>
+<td><strong>No</strong></td>
+<td><strong>No</strong></td>
+<td><strong>No</strong></td>
+<td>Yes</td>
+<td><strong>No</strong></td>
+<td>Yes (anchor)</td>
+<td>No</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Workflow &amp; Quality</td>
+<td>Yes</td>
+<td><strong>No</strong></td>
+<td>Yes</td>
+<td>Yes</td>
+<td><strong>No</strong></td>
+<td>Yes</td>
+<td>Inside page (Task lifecycle)</td>
+<td>No</td>
+<td>Methodology</td>
+</tr>
+<tr>
+<td>Unique extra tab</td>
+<td>None</td>
+<td>None</td>
+<td>None</td>
+<td>Company Data</td>
+<td>None</td>
+<td>None</td>
+<td>MCPs</td>
+<td>None</td>
+<td>None</td>
+</tr>
+<tr>
+<td><strong>Tab count</strong></td>
+<td><strong>7</strong></td>
+<td>5</td>
+<td>6</td>
+<td>5</td>
+<td>6</td>
+<td>6</td>
+<td>7 (one page)</td>
+<td>2</td>
+<td>3</td>
+</tr>
+</tbody>
+</table></div></details>
+<details><summary>About page blocks (Family A)</summary><div class="d"><table>
+<thead>
+<tr>
+<th>EKW block</th>
+<th>SciCode++</th>
+<th>TB 3.0</th>
+<th>CEO</th>
+<th>Company</th>
+<th>Odysseys</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Hero + badges</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Bullet list, not badges</td>
+<td>Bullet list, not badges</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Stat tiles</td>
+<td>4</td>
+<td>3</td>
+<td>3</td>
+<td>3</td>
+<td>3</td>
+</tr>
+<tr>
+<td>Pass-rate bar chart</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Domain x model heatmap</td>
+<td>Domain share chart instead</td>
+<td><strong>Missing</strong></td>
+<td><strong>Missing</strong></td>
+<td>Yes</td>
+<td><strong>Missing</strong></td>
+</tr>
+<tr>
+<td>Reward block</td>
+<td><strong>Missing</strong></td>
+<td><strong>Missing</strong></td>
+<td><strong>Missing</strong></td>
+<td><strong>Missing</strong></td>
+<td><strong>Missing</strong></td>
+</tr>
+<tr>
+<td>The Verdict</td>
+<td>"What the numbers say"</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Failure findings</td>
+<td>1</td>
+<td>1</td>
+<td><strong>Missing</strong></td>
+<td><strong>Missing</strong></td>
+<td><strong>Missing</strong></td>
+</tr>
+<tr>
+<td>Evidence task cards</td>
+<td>3</td>
+<td>3</td>
+<td>3</td>
+<td>3</td>
+<td>3</td>
+</tr>
+<tr>
+<td>Extras not in EKW</td>
+<td>Score tables, top subdomains, "How the pack is built"</td>
+<td>Published-suite cards</td>
+<td>None</td>
+<td>None</td>
+<td>Trajectory replay viewer</td>
+</tr>
+</tbody>
+</table></div></details>
+<details><summary>Inner pages (Family A)</summary><div class="d"><table>
+<thead>
+<tr>
+<th>Page part</th>
+<th>EKW</th>
+<th>SciCode++</th>
+<th>TB 3.0</th>
+<th>CEO</th>
+<th>Company</th>
+<th>Odysseys</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Leaderboard tiles</td>
+<td>3</td>
+<td>2</td>
+<td>3</td>
+<td>3</td>
+<td>2</td>
+<td>2</td>
+</tr>
+<tr>
+<td>Benchmark Scope</td>
+<td>Yes</td>
+<td><strong>No</strong></td>
+<td>Yes</td>
+<td><strong>No</strong></td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Difficulty heatmap</td>
+<td>Domain</td>
+<td><strong>No</strong></td>
+<td>Domain</td>
+<td>Task</td>
+<td>Category</td>
+<td>Category</td>
+</tr>
+<tr>
+<td>Economics charts</td>
+<td>6</td>
+<td>2 (tokens)</td>
+<td>5</td>
+<td>6</td>
+<td>2 (placeholder)</td>
+<td>2 (Run Effort)</td>
+</tr>
+<tr>
+<td>Frontier scatters</td>
+<td>2</td>
+<td><strong>No</strong></td>
+<td>2</td>
+<td><strong>No</strong></td>
+<td><strong>No</strong></td>
+<td><strong>No</strong></td>
+</tr>
+<tr>
+<td>Tasks domain filter</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+<td><strong>No</strong> (hierarchy tree)</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Task cards shown / total</td>
+<td>3 / 69</td>
+<td>5 / 3,451</td>
+<td>6 / 100</td>
+<td>20 / 20, no detail pages</td>
+<td>64 / 64</td>
+<td>100 / 100</td>
+</tr>
+<tr>
+<td>Task detail sub-tabs</td>
+<td>Problem, Package, Results, Trials</td>
+<td>Main problem + Steps (no URLs)</td>
+<td>Same as EKW</td>
+<td>No task pages</td>
+<td>No Package</td>
+<td>Problem, Replay, Results</td>
+</tr>
+<tr>
+<td>Failure: key findings</td>
+<td>4</td>
+<td>1</td>
+<td>1</td>
+<td>n/a</td>
+<td>0</td>
+<td>2</td>
+</tr>
+<tr>
+<td>Failure: stages / modes</td>
+<td>5 / 20</td>
+<td>4 / 8</td>
+<td>7 / 22</td>
+<td>n/a</td>
+<td>2 / 6</td>
+<td>4 / 5</td>
+</tr>
+<tr>
+<td>Failure: mode tags</td>
+<td>All 3 types</td>
+<td>None</td>
+<td>Harness-fixable only</td>
+<td>n/a</td>
+<td>None</td>
+<td>None</td>
+</tr>
+<tr>
+<td>Failure: radar profile</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>n/a</td>
+<td><strong>No</strong></td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Taxonomy coverage matrix</td>
+<td>Yes</td>
+<td>Not checked</td>
+<td><strong>No</strong></td>
+<td>n/a</td>
+<td>Not checked</td>
+<td>Not checked</td>
+</tr>
+<tr>
+<td>Workflow §1 lifecycle</td>
+<td>Swimlane</td>
+<td>n/a</td>
+<td><strong>Missing</strong></td>
+<td>Decomposition tree</td>
+<td>n/a</td>
+<td>Swimlane</td>
+</tr>
+<tr>
+<td>Workflow QC gates rows</td>
+<td>6</td>
+<td>n/a</td>
+<td>6</td>
+<td>2</td>
+<td>n/a</td>
+<td>4</td>
+</tr>
+<tr>
+<td>Attestation notice</td>
+<td>Yes</td>
+<td>n/a</td>
+<td><strong>No</strong></td>
+<td><strong>No</strong></td>
+<td>n/a</td>
+<td><strong>No</strong></td>
+</tr>
+</tbody>
+</table></div></details>
+<details><summary>Sub-site notes</summary><div class="d"><table>
+<thead>
+<tr>
+<th>Sub-site</th>
+<th>Template</th>
+<th>How its About page tells the story</th>
+<th>Biggest gap vs EKW</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://bench.turing.com/scicode/about/">SciCode++</a></td>
+<td>A</td>
+<td>13 blocks: longest About page; adds score tables, top-subdomain links, 4 "How the pack is built" cards</td>
+<td>No Reward or Workflow tab; leaderboard has no scope, heatmap or frontier</td>
+</tr>
+<tr>
+<td><a href="https://bench.turing.com/terminal-bench-3/about/">Terminal-Bench 3.0</a></td>
+<td>A</td>
+<td>Hero "Hard for the right reasons", 3 tiles, chart, verdict, 1 failure finding, evidence, links to Harbor hub tasks</td>
+<td>No Reward tab; taxonomy has no definitions; workflow starts at §2</td>
+</tr>
+<tr>
+<td><a href="https://bench.turing.com/ceo-bench/about/">CEO Bench</a></td>
+<td>A</td>
+<td>Simulated company (Cirrus Sleep, Inc.) framing; adds a unique <a href="https://bench.turing.com/ceo-bench/datastore/">Company Data</a> file browser (1,165 files)</td>
+<td>No Failure, Taxonomy or Reward tab; 0 of 20 tasks have detail pages</td>
+</tr>
+<tr>
+<td><a href="https://bench.turing.com/companybench/about/">CompanyBench</a></td>
+<td>A</td>
+<td>Closest About page to EKW: has the domain heatmap</td>
+<td>No Workflow tab; failure page has no findings, TOC or radar; oldest update (2026-06-15)</td>
+</tr>
+<tr>
+<td><a href="https://bench.turing.com/odysseys-mega/about/">OdysseysMega</a></td>
+<td>A</td>
+<td>Adds a trajectory replay viewer (model tabs, failures vs strong runs); task detail has a Replay tab</td>
+<td>No Reward tab; no heatmap on About</td>
+</tr>
+<tr>
+<td><a href="https://bench.turing.com/sdlc/">SDLCbench</a></td>
+<td>B</td>
+<td>One dark dashboard: hero, 9 RL environment logos, Why this benchmark, leaderboard, failure findings, 8-tab task inspector, MCP Tool Explorer, swimlane, reward shaping</td>
+<td>No hub shell at all: no breadcrumb, switcher, CTA or dates</td>
+</tr>
+<tr>
+<td><a href="https://bench.turing.com/medical/">Medical Bench</a></td>
+<td>B</td>
+<td>Own header ("Clinical reasoning dataset"), Leaderboard and Tasks views, task panel with Prompt, Datastore, Model Comparison, Model Insights</td>
+<td>Only 2 tabs; no About story, CTA, failure, taxonomy or workflow</td>
+</tr>
+<tr>
+<td><a href="https://bench.turing.com/open-mm-rl/">Open-MM-RL</a></td>
+<td>C</td>
+<td>Dataset sales page: "Trending #1 on Hugging Face", Pack at a glance (2,000 prompts, 3,060 images), landscape table vs SciFIBench, StepSTEM, HLE, domain and image-type charts, DataHub and Loom links</td>
+<td>No leaderboard or model results; no CTA to the contact form</td>
+</tr>
+</tbody>
+</table></div></details>
+<details><summary>Bugs found along the way</summary><div class="d"><table>
+<thead>
+<tr>
+<th>Where</th>
+<th>Bug</th>
+<th>Scope</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>All leaderboards</td>
+<td>"Comparisons" in the On-this-page list has no matching section</td>
+<td>Template</td>
+</tr>
+<tr>
+<td>All Family A pages</td>
+<td>"Anchor model: All" filter shows no other options</td>
+<td>Template</td>
+</tr>
+<tr>
+<td>All Tasks pages</td>
+<td>Copy says "the search box above" but no search box renders</td>
+<td>Template</td>
+</tr>
+<tr>
+<td>All Verdict blocks</td>
+<td>Per-model lines repeat (best model listed twice); CEO calls every model "the strongest model"</td>
+<td>Template</td>
+</tr>
+<tr>
+<td>CompanyBench, CEO, Odysseys headers</td>
+<td>Dangling "by" / "by×" text with no partner name</td>
+<td>Template</td>
+</tr>
+<tr>
+<td>EKW Workflow</td>
+<td>Raw config string <code>sections.workflow.attested_by</code> shown to readers</td>
+<td>EKW</td>
+</tr>
+<tr>
+<td>EKW Leaderboard</td>
+<td>Two different Last updated dates (2026-08-21 and 2026-08-24); text says "five-task sample" vs 69 tasks</td>
+<td>EKW</td>
+</tr>
+<tr>
+<td>TB 3.0 About</td>
+<td>Heading misspelt "Failue Modes"</td>
+<td>TB 3.0</td>
+</tr>
+<tr>
+<td>TB 3.0 Workflow</td>
+<td>11 configs x 100 tasks x 8 = 8,800 attempts, page says 6,400; sections start at §2</td>
+<td>TB 3.0</td>
+</tr>
+<tr>
+<td>CompanyBench Reward</td>
+<td>Says "two trials", shows 6 cards; trial_9 appears twice with different rewards; failed-check counts don't add up</td>
+<td>CompanyBench</td>
+</tr>
+<tr>
+<td>CompanyBench / CEO Economics</td>
+<td>Axis maxima print 10x the value (630 vs 63; 1970 vs 197)</td>
+<td>Chart component</td>
+</tr>
+<tr>
+<td>SciCode++ Tasks</td>
+<td>Chemistry card has no description and a stray "#"</td>
+<td>SciCode++</td>
+</tr>
+<tr>
+<td>Hub page</td>
+<td>SciCode++ and EKW hub links point to the bench root, which is a "Redirecting…" stub</td>
+<td>Hub</td>
+</tr>
+</tbody>
+</table></div></details>
+
+<footer>Sources: <a href="https://bench.turing.com/">bench.turing.com</a> and its sub-site pages, reviewed 2026-11-10.</footer>
+</main></body></html>
